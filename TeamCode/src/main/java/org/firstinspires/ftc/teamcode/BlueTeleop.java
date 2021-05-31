@@ -24,6 +24,7 @@ import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
@@ -57,6 +58,8 @@ public class BlueTeleop extends MatchOpMode {
     private Button lowMidWobbleButton;
     private Button autoPowershotButton;
     private Button increaseSpeedButton;
+
+    LightSubsystem lights;
     Vision vision;
     // Thomas is a dumdum
     @Override
@@ -87,7 +90,8 @@ public class BlueTeleop extends MatchOpMode {
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(arm, lazySusanServo, clawServo, wobbleTouchSensor, telemetry);
 
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.BLUE_ONLY, false);
+        lights = new LightSubsystem(hardwareMap);
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.BLUE_ONLY, false, lights);
         gamepad1.setJoystickDeadzone(0.0f);
         driverGamepad = new GamepadEx(gamepad1);
         operatorGamepad = new GamepadEx(gamepad2);
@@ -139,7 +143,14 @@ public class BlueTeleop extends MatchOpMode {
     }
 
     @Override
+    public void disabledPeriodic() {
+       vision.periodic();
+       lights.periodic();
+    }
+
+    @Override
     public void robotPeriodic() {
+
     }
 }
 

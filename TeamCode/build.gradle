@@ -14,7 +14,6 @@ dependencies {
     /*
      * Other Modules
      */
-    // Testing
     dependencies {
         implementation 'org.ftclib.ftclib:core:1.2.0'
         implementation 'org.ftclib.ftclib:vision:1.1.0'

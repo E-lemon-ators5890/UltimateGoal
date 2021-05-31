@@ -3,19 +3,13 @@ package org.firstinspires.ftc.teamcode.inperson;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-
-import java.util.logging.Level;
 
 @TeleOp(name = "Ring Vision Test")
 public class RingDetectorOpMode extends MatchOpMode {
@@ -28,14 +22,15 @@ public class RingDetectorOpMode extends MatchOpMode {
     private OpenCvCamera camera;
     GamepadEx driverGamepad;
     Vision vision;
+    LightSubsystem lights;
 
     @Override
     public void robotInit() {
         driverGamepad = new GamepadEx(gamepad1);
         //This will instantiate an OpenCvCamera object for the camera we'll be using
 
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, topHeight, bottomHeight, width, UGBasicHighGoalPipeline.Mode.BLUE_ONLY);
-
+        lights = new LightSubsystem(hardwareMap);
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, topHeight, bottomHeight, width, UGBasicHighGoalPipeline.Mode.BLUE_ONLY, lights);
     }
 
     @Override

@@ -34,6 +34,7 @@ public class Vision extends SubsystemBase {
 
     private CompHGPipeline goalDetector;
     private UGBasicHighGoalPipeline.Mode color;
+    private LightSubsystem lights;
 
     private boolean runningRingDetector;
 
@@ -41,7 +42,7 @@ public class Vision extends SubsystemBase {
 
     private double homepos = 0.41;
     private double homeViz = .12;
-    public Vision(HardwareMap hw, String ringWebcam, String goalWebcam, Telemetry tl, double top, double bottom, double width, UGBasicHighGoalPipeline.Mode color, boolean initRing) {
+    public Vision(HardwareMap hw, String ringWebcam, String goalWebcam, Telemetry tl, double top, double bottom, double width, UGBasicHighGoalPipeline.Mode color, boolean initRing, LightSubsystem lights) {
         this.telemetry = tl;
 
         ringCamera = hw.get(WebcamName.class, "webcam");
@@ -81,12 +82,13 @@ public class Vision extends SubsystemBase {
         });
         switchableWebcam.openCameraDevice();
 
+        this.lights = lights;
     }
-    public Vision(HardwareMap hw, String ringWebcam, String goalWebcam, Telemetry tl, double top, double bottom, double width, UGBasicHighGoalPipeline.Mode color) {
-        this(hw, ringWebcam, goalWebcam, tl, top, bottom, width, color, true);
+    public Vision(HardwareMap hw, String ringWebcam, String goalWebcam, Telemetry tl, double top, double bottom, double width, UGBasicHighGoalPipeline.Mode color, LightSubsystem lights) {
+        this(hw, ringWebcam, goalWebcam, tl, top, bottom, width, color, true, lights);
     }
 
-        public void switchToHG() {
+    public void switchToHG() {
         if (isRunningHGDetector())
             return;
 
@@ -111,7 +113,17 @@ public class Vision extends SubsystemBase {
             Util.logger(this, telemetry, Level.INFO, "Current Stack", currentStack);
             Util.logger(this, telemetry, Level.INFO, "Bottom", ringPipeline.getBottomAverage());
             Util.logger(this, telemetry, Level.INFO, "Top", ringPipeline.getTopAverage());
-
+            switch(currentStack) {
+                case FOUR:
+                    lights.setFourStack();
+                    break;
+                case ONE:
+                    lights.setOneStack();
+                    break;
+                case ZERO:
+                    lights.setZeroStack();
+                    break;
+            }
             poggers.setPosition(homepos);
         }
 
@@ -120,10 +132,13 @@ public class Vision extends SubsystemBase {
             Util.logger(this, telemetry, Level.INFO, "Goal pitch (0 if not visible)", goalDetector.getTargetPitch());
             Util.logger(this, telemetry, Level.INFO, "Offset", goalDetector.getxOffset());
             if(goalDetector.isTargetVisible()) {
+                lights.setAutoAim();
                 poggers.setPosition(homeViz);
             } else {
+                lights.setTeleop();
                 poggers.setPosition(homepos);
             }
+
         }
 
     }

@@ -3,16 +3,12 @@ package org.firstinspires.ftc.teamcode.inperson;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
-import org.openftc.easyopencv.OpenCvCamera;
-
-import java.util.logging.Level;
 
 @TeleOp(name = "HG Vision Test")
 public class HGDetectorOpMode extends MatchOpMode {
@@ -22,14 +18,15 @@ public class HGDetectorOpMode extends MatchOpMode {
     public int offset = 0;
 
     GamepadEx driverGamepad;
+    LightSubsystem lights;
     Vision vision;
 
     @Override
     public void robotInit() {
         driverGamepad = new GamepadEx(gamepad1);
         //This will instantiate an OpenCvCamera object for the camera we'll be using
-
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.BLUE_ONLY, false);
+        lights = new LightSubsystem(hardwareMap);
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.BLUE_ONLY, false, lights);
     }
 
     @Override
@@ -47,6 +44,8 @@ public class HGDetectorOpMode extends MatchOpMode {
 
     @Override
     public void disabledPeriodic() {
+        vision.periodic();
+        lights.periodic();
         run();
     }
 
