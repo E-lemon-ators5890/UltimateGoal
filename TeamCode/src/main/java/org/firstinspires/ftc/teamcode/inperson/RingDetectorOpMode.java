@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;

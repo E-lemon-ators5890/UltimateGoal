@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
@@ -58,7 +59,8 @@ public class RedTeleop extends MatchOpMode {
     private Button autoPowershotButton;
     private Button increaseSpeedButton;
     Vision vision;
-    // Thomas is a dumdum
+    LightSubsystem lights;
+
     @Override
     public void robotInit() {
         //Drivetrain Hardware Initializations
@@ -87,6 +89,7 @@ public class RedTeleop extends MatchOpMode {
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(arm, lazySusanServo, clawServo, wobbleTouchSensor, telemetry);
         vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.RED_ONLY, false);
+        lights = new LightSubsystem(hardwareMap, vision, shooterWheels, wobbleGoalArm);
 
         gamepad1.setJoystickDeadzone(0.0f);
         driverGamepad = new GamepadEx(gamepad1);
@@ -130,6 +133,10 @@ public class RedTeleop extends MatchOpMode {
 
     }
 
+    @Override
+    public void disabledPeriodic() {
+        lights.periodic();
+    }
 
     @Override
     public void matchStart() {

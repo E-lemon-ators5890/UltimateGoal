@@ -62,6 +62,7 @@ public class ShooterWheels extends SubsystemBase {
 
     private void handleShooterPID() {
         if (shooterTarget == 0) {
+            shooterWheelsPID.setSetPoint(0);
             setShooterPower(0);
             return;
         }
@@ -99,5 +100,9 @@ public class ShooterWheels extends SubsystemBase {
 
     public boolean atSetpoint() {
         return shooterWheelsPID.atSetPoint();
+    }
+
+    public double getSetpoint() {
+        return shooterWheelsPID.getSetPoint();
     }
 }

@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
@@ -58,6 +59,7 @@ public class SpicyAuto extends MatchOpMode {
     private Intake intake;
     private WobbleGoalArm wobbleGoalArm;
     private Vision vision;
+    private LightSubsystem lights;
 
     @Override
     public void robotInit() {
@@ -88,11 +90,13 @@ public class SpicyAuto extends MatchOpMode {
         vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.RED_RIGHT_VISION.TOP_HEIGHT, VisionConstants.RED_RIGHT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_RIGHT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.RED_ONLY);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
 
+        lights = new LightSubsystem(hardwareMap, vision, shooterWheels, wobbleGoalArm);
     }
 
     @Override
     public void disabledPeriodic() {
         Util.logger(this, telemetry, Level.INFO, "Current Stack", vision.getCurrentStack());
+        lights.periodic();
     }
 
     @Override
