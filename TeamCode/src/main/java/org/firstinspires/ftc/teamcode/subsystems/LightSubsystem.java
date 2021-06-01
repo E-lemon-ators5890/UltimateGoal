@@ -1,9 +1,15 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Util;
+
+import java.util.logging.Level;
+
+@Config
 public class LightSubsystem extends SubsystemBase {
     private RevBlinkinLedDriver blinkinLedDriver;
     private RevBlinkinLedDriver.BlinkinPattern pattern;
@@ -13,9 +19,12 @@ public class LightSubsystem extends SubsystemBase {
     private WobbleGoalArm wobbleGoalArm;
     private final int SPEED_RANGE = 150;
 
+    public static RevBlinkinLedDriver.BlinkinPattern DEFAULT_PATTERN = RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE;
+    public static double test = 0;
     public LightSubsystem(HardwareMap hw, Vision vision, ShooterWheels wheels, WobbleGoalArm wobbleGoalArm) {
         blinkinLedDriver = hw.get(RevBlinkinLedDriver.class, "blinkin");
-        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+
+        pattern = RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE;
 
         this.vision = vision;
         this.shooterWheels = wheels;
@@ -25,8 +34,8 @@ public class LightSubsystem extends SubsystemBase {
     /**
      If running Ring Detector -> Show patterns based on camera
      If Target Visible, show green if shooter on else blue violet
-     If Shooter On (Target not visible), show gold
-     Else show confetti
+     If Shooter On (Target not visible), show FIRE_MEDIUM
+     Else show SINELON_OCEAN_PALETTE
      */
     @Override
     public void periodic() {
@@ -35,26 +44,27 @@ public class LightSubsystem extends SubsystemBase {
         if (vision.isRunningRingDetector()) {
             switch (vision.getCurrentStack()) {
                 case FOUR:
-                    pattern = RevBlinkinLedDriver.BlinkinPattern.STROBE_GOLD;
+                    pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_RED;
                     break;
                 case ONE:
-                    pattern = RevBlinkinLedDriver.BlinkinPattern.SINELON_LAVA_PALETTE;
+                    pattern = RevBlinkinLedDriver.BlinkinPattern.BEATS_PER_MINUTE_RAINBOW_PALETTE;
                     break;
                 case ZERO:
-                    pattern = RevBlinkinLedDriver.BlinkinPattern.BEATS_PER_MINUTE_OCEAN_PALETTE;
+                    pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_BLUE;
                     break;
             }
         } else if (vision.isRunningHGDetector() && vision.isTargetVisible()) {
             if (isShooterOn) {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.LAWN_GREEN;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.DARK_GREEN;
             } else {
                 pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE_VIOLET;
             }
         } else if (isShooterOn) {
             pattern = RevBlinkinLedDriver.BlinkinPattern.GOLD;
         } else {
-            pattern = RevBlinkinLedDriver.BlinkinPattern.CONFETTI;
+            pattern = DEFAULT_PATTERN;
         }
+        Util.logger(this, Level.INFO, "Pattern Name", pattern.name());
         blinkinLedDriver.setPattern(pattern);
     }
 }

@@ -12,7 +12,7 @@
 apply from: '../build.common.gradle'
 dependencies {
     /*
-     * Other Modules
+     * Other
      */
     // Testing
     dependencies {
