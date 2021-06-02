@@ -26,7 +26,7 @@ public class RightRedZeroCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 

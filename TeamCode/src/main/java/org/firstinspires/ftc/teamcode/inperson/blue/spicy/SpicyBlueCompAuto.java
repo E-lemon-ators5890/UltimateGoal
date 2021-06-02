@@ -46,7 +46,7 @@ public class SpicyBlueCompAuto extends MatchOpMode {
     private MotorEx intakeMotor;
     private DcMotorEx shooterMotorFront, shooterMotorBack;
     private MotorEx arm;
-    private ServoEx feedServo, clawServo, lazySusanServo;
+    private ServoEx feedServo, leftClawServo, rightClawServo;
     private TouchSensor wobbleTouchSensor;
     private ServoEx intakeServo;
 
@@ -77,8 +77,8 @@ public class SpicyBlueCompAuto extends MatchOpMode {
 
         // Wobble Harware initializations
         arm = new MotorEx(hardwareMap, "arm", Motor.GoBILDA.RPM_60);
-        clawServo = new SimpleServo(hardwareMap, "claw_servo", 0, 230);
-        lazySusanServo = new SimpleServo(hardwareMap, "lazy_susan", 0, 360);
+        leftClawServo = new SimpleServo(hardwareMap, "left_claw_servo", 0, 230);
+        rightClawServo = new SimpleServo(hardwareMap, "right_claw_servo", 0, 230);
         wobbleTouchSensor = hardwareMap.get(TouchSensor.class, "Touch");
 
         // Subsystems
@@ -87,7 +87,7 @@ public class SpicyBlueCompAuto extends MatchOpMode {
         intake = new Intake(intakeMotor, intakeServo, telemetry);
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
-        wobbleGoalArm = new WobbleGoalArm(arm, lazySusanServo, clawServo, wobbleTouchSensor, telemetry);
+        wobbleGoalArm = new WobbleGoalArm(arm, leftClawServo, rightClawServo, wobbleTouchSensor, telemetry);
         drivetrain.setPoseEstimate(Trajectories.BlueLeftTape.startPose);
         vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.BLUE_LEFT_VISION.TOP_HEIGHT, VisionConstants.BLUE_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.BLUE_LEFT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.BLUE_ONLY);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));

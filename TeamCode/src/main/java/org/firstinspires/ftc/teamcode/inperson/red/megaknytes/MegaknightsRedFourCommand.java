@@ -27,7 +27,7 @@ public class MegaknightsRedFourCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -45,12 +45,12 @@ public class MegaknightsRedFourCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                new InstantCommand(wobbleGoalArm::setTurretDiagonalRed,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretDiagonalRed,wobbleGoalArm),
                 new TurnCommand(drivetrain, 185),
                 new DriveForwardCommand(drivetrain, 45),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain,-41),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
+                new DriveForwardCommand(drivetrain,-41)
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
 
 
 

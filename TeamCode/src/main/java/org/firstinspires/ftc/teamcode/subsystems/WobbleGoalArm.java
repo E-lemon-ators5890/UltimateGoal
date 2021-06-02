@@ -25,7 +25,7 @@ public class WobbleGoalArm extends SubsystemBase {
     public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.01, 0.0001, 0.003, 0);
     public static double ARM_OFFSET = -152;
     private PIDFController controller;
-    private ServoEx claw, lazySusan;
+    private ServoEx leftClaw, rightClaw;
     private boolean automatic;
 
     public static double CPR = 2786;
@@ -33,15 +33,15 @@ public class WobbleGoalArm extends SubsystemBase {
 
     private double encoderOffset = 0;
 
-    public WobbleGoalArm(MotorEx arm, ServoEx lazySusan, ServoEx claw, TouchSensor homeSensor, Telemetry tl) {
+    public WobbleGoalArm(MotorEx arm, ServoEx leftClaw, ServoEx rightClaw, TouchSensor homeSensor, Telemetry tl) {
         this.arm = arm;
         this.arm.setDistancePerPulse(360/CPR);
         arm.setInverted(false);
         controller = new PIDFController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d, pidfCoefficients.f,  getAngle(), getAngle());
         controller.setTolerance(10);
 
-        this.claw = claw;
-        this.lazySusan = lazySusan;
+        this.leftClaw = leftClaw;
+        this.rightClaw = rightClaw;
         this.homeSwitch = homeSensor;
         this.telemetry = tl;
         automatic = false;
@@ -66,7 +66,8 @@ public class WobbleGoalArm extends SubsystemBase {
            arm.set(output);
         }
 
-        Util.logger(this, telemetry, Level.INFO, "Wobble Claw Pos", claw.getPosition());
+        Util.logger(this, telemetry, Level.INFO, "Left Wobble Claw Pos", leftClaw.getPosition());
+        Util.logger(this, telemetry, Level.INFO, "Right Wobble Claw Pos", rightClaw.getPosition());
         Util.logger(this, telemetry, Level.INFO, "Wobble Angle", getAngle());
         Util.logger(this, telemetry, Level.INFO, "Wobble Goal", controller.getSetPoint());
         Util.logger(this, telemetry, Level.INFO, "Wobble Power", arm.get());
@@ -129,33 +130,13 @@ public class WobbleGoalArm extends SubsystemBase {
         return controller.atSetPoint();
     }
 
-    public void setClawPosition(double position) {
-        claw.setPosition(position);
+    public void setClawPosition(double leftPosition, double rightPosition) {
+        leftClaw.setPosition(leftPosition);
+        rightClaw.setPosition(rightPosition);
     }
-    public void openClaw() { setClawPosition(.75); }
-    public void closeClaw() { setClawPosition(0.32); }
-
-    public void setLazySusanPosition(double position) {
-        lazySusan.setPosition(position);
-    }
-    public void setTurretLeft() {
-        setLazySusanPosition(1);
-    }
-    public void setTurretRight() {
-        setLazySusanPosition(0.143);
-    }
-    public void setTurretFarRight() {
-        setLazySusanPosition(0);
-    }
-    public void setTurretMiddle() {
-        setLazySusanPosition(0.566);
-    }
-    public void setTurretDiagonalRed() {
-        setLazySusanPosition(0.8);
-    }
-    public void setTurretDiagonalBlue(){
-        setLazySusanPosition(0.34);
-    }
+    //get servo positions
+    public void openClaw() { setClawPosition(.75, .75); }
+    public void closeClaw() { setClawPosition(0.32, .32); }
 
     public void setOffset() {
         resetEncoder();

@@ -24,7 +24,7 @@ public class GPBlueFourCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -42,12 +42,12 @@ public class GPBlueFourCommand extends SequentialCommandGroup {
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
                 new TurnCommand(drivetrain, 185),
                 new DriveForwardCommand(drivetrain, 52),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain,-43),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
+                new DriveForwardCommand(drivetrain,-43)
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
 
                 //new SplineCommand(drivetrain, new Vector2d(15.5, 10), Math.toRadians(180), )
 

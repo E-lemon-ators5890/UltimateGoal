@@ -27,7 +27,7 @@ public class FellowshipRedZeroCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -47,13 +47,13 @@ public class FellowshipRedZeroCommand extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
                 new DriveForwardCommand(drivetrain, -10),
-                new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
                 new WaitCommand(500),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new TurnToCommand(drivetrain, 180),
 
 

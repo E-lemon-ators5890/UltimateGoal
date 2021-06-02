@@ -23,7 +23,7 @@ public class RightRedPSFourCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
                 new WaitCommand(10000),
@@ -47,13 +47,13 @@ public class RightRedPSFourCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 170),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new DriveForwardCommand(drivetrain, -60),
-                new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
                 new WaitCommand(500),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, 50)
 
 
