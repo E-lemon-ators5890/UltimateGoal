@@ -24,7 +24,7 @@ public class SpicyBlueFourCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -41,13 +41,13 @@ public class SpicyBlueFourCommand extends SequentialCommandGroup {
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
                 new TurnCommand(drivetrain, 185),
                 new DriveForwardCommand(drivetrain, 52),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain,-43),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new TurnCommand(drivetrain, -90),
                 new DriveForwardCommand(drivetrain, -10)
         );

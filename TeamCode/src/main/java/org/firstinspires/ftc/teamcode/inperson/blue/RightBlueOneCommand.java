@@ -24,7 +24,7 @@ public class RightBlueOneCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                new InstantCommand(wobbleGoalArm::setTurretMiddle),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -44,14 +44,14 @@ public class RightBlueOneCommand extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
                 new DriveForwardCommand(drivetrain, -50),
-                new InstantCommand(wobbleGoalArm::setTurretLeft,wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretLeft,wobbleGoalArm),
                 new WaitCommand(500),
                 new InstantCommand(wobbleGoalArm::placeWobbleGoal,wobbleGoalArm),
                 new WaitCommand(1000),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new WaitCommand(500),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, 40),
                 new TurnCommand(drivetrain, -90),
                 new DriveForwardCommand(drivetrain, -10)
