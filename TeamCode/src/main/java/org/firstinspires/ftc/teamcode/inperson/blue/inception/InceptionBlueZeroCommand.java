@@ -58,10 +58,6 @@ public class InceptionBlueZeroCommand extends SequentialCommandGroup {
 
 
 
-
-
-
-
-                );
+        );
     }
 }

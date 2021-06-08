@@ -45,13 +45,20 @@ public class MegaknightsBlueFourCommand extends SequentialCommandGroup {
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                //new InstantCommand(wobbleGoalArm::setTurretDiagonalBlue,wobbleGoalArm),
-                new TurnCommand(drivetrain, 185),
-                new WaitCommand(1000),
-                new DriveForwardCommand(drivetrain, 45),
+                new DriveForwardCommand(drivetrain, -60),
+
+                new TurnToCommand(drivetrain, 90),
+                new DriveForwardCommand(drivetrain, -7),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain,-41)
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
+                new WaitCommand(500),
+                new TurnToCommand(drivetrain, 180),
+                new DriveForwardCommand(drivetrain, 48),
+                new TurnCommand(drivetrain, 90),
+                new DriveForwardCommand(drivetrain, -10),
+
+
+                new InstantCommand(intake::stop, intake)
+
 
 
 

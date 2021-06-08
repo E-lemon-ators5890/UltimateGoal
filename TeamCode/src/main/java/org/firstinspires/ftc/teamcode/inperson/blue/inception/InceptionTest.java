@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.left;
+package org.firstinspires.ftc.teamcode.inperson.blue.inception;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -20,9 +20,9 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-@Autonomous(name = "Blue Left Zero Mid Park Test", group = "Blue")
-@Disabled
-public class BlueLeftZeroAltParkTest extends MatchOpMode {
+@Autonomous(name = "Blue Inception Test", group = "Blue")
+//@Disabled
+public class InceptionTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
@@ -77,7 +77,7 @@ public class BlueLeftZeroAltParkTest extends MatchOpMode {
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new BlueLeftZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        schedule(new InceptionBlueFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

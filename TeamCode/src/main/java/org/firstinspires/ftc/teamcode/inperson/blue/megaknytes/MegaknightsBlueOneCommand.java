@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SplineCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
@@ -44,16 +45,15 @@ public class MegaknightsBlueOneCommand extends SequentialCommandGroup {
                 //Place Wobble Goal
                 new TurnToCommand(drivetrain, 170),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
-                new SplineCommand(drivetrain, new Vector2d(40, 4), Math.toRadians(0), true),
-                //new InstantCommand(wobbleGoalArm::setTurretRight,wobbleGoalArm),
-                new WaitCommand(500),
+                new DriveForwardCommand(drivetrain, -50),
+                new TurnToCommand(drivetrain, 225),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
-                new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
-                new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
-                new SplineCommand(drivetrain, new Vector2d(15, 10), Math.toRadians(0)),
-                // new DriveForwardCommand(drivetrain, 30),
+                new DriveForwardCommand(drivetrain, -2),
+                new TurnToCommand(drivetrain, 180),
+                new DriveForwardCommand(drivetrain, 40),
+                new TurnCommand(drivetrain, 90),
+                new DriveForwardCommand(drivetrain, -10),
                 new TurnToCommand(drivetrain,0, true)
 
                 // new DriveForwardCommand(drivetrain, 10)

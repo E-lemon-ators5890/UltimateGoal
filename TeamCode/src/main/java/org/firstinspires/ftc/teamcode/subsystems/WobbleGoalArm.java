@@ -22,8 +22,8 @@ public class WobbleGoalArm extends SubsystemBase {
     private Telemetry telemetry;
     private MotorEx arm;
     private TouchSensor homeSwitch;
-    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.01, 0.0001, 0.003, 0);
-    public static double ARM_OFFSET = -152;
+    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.01, 0.000, 0.00, 0);
+    public static double ARM_OFFSET = -167.6346015793252;
     private PIDFController controller;
     private ServoEx leftClaw, rightClaw;
     private boolean automatic;
@@ -38,7 +38,7 @@ public class WobbleGoalArm extends SubsystemBase {
         this.arm.setDistancePerPulse(360/CPR);
         arm.setInverted(false);
         controller = new PIDFController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d, pidfCoefficients.f,  getAngle(), getAngle());
-        controller.setTolerance(10);
+        controller.setTolerance(5);
 
         this.leftClaw = leftClaw;
         this.rightClaw = rightClaw;
@@ -62,13 +62,15 @@ public class WobbleGoalArm extends SubsystemBase {
     public void periodic() {
         if (automatic) {
            controller.setF(pidfCoefficients.f * Math.cos(Math.toRadians(controller.getSetPoint())));
-           double output = controller.calculate(getAngle());
+           double output = -controller.calculate(getAngle());
            arm.set(output);
         }
 
         Util.logger(this, telemetry, Level.INFO, "Left Wobble Claw Pos", leftClaw.getPosition());
         Util.logger(this, telemetry, Level.INFO, "Right Wobble Claw Pos", rightClaw.getPosition());
         Util.logger(this, telemetry, Level.INFO, "Wobble Angle", getAngle());
+        Util.logger(this, telemetry, Level.INFO, "Absolute Wobble Angle", getEncoderDistance());
+
         Util.logger(this, telemetry, Level.INFO, "Wobble Goal", controller.getSetPoint());
         Util.logger(this, telemetry, Level.INFO, "Wobble Power", arm.get());
         Util.logger(this, telemetry, Level.INFO, "Home Position", isAtHome());
@@ -101,26 +103,25 @@ public class WobbleGoalArm extends SubsystemBase {
     }
 
     public double getAngle() {
-        return ARM_OFFSET + getEncoderDistance();
+        return ARM_OFFSET - getEncoderDistance();
     }
 
     /************************************************************************************************/
     public void placeWobbleGoal() {
         // TODO CHNAGNE
-        controller.setP(0.01);
 
         automatic = true;
-        controller.setSetPoint(5);
+        controller.setSetPoint(0);
     }
     public void liftWobbleGoal() {
-        controller.setP(0.025);
+
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 5);
+        controller.setSetPoint(ARM_OFFSET + 25);
     }
     public void midWobbleGoal() {
 
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 40);
+        controller.setSetPoint(ARM_OFFSET + 60);
     }
     public void setWobbleGoal(double angle) {
         automatic = true;
@@ -135,8 +136,8 @@ public class WobbleGoalArm extends SubsystemBase {
         rightClaw.setPosition(rightPosition);
     }
     //get servo positions
-    public void openClaw() { setClawPosition(.75, .75); }
-    public void closeClaw() { setClawPosition(0.32, .32); }
+    public void closeClaw() { setClawPosition(0.48, 0.92); }
+    public void openClaw() { setClawPosition(0.9125, 0.54); }
 
     public void setOffset() {
         resetEncoder();

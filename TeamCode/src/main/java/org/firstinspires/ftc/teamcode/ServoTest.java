@@ -5,6 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import static android.os.SystemClock.sleep;
+
+
 @TeleOp(name="ServoTest")
 public class ServoTest extends OpMode {
 //hardware initialization stuff
@@ -18,7 +22,9 @@ public class ServoTest extends OpMode {
          */
         @Override
         public void init() {
-                servo= hardwareMap.get(Servo.class, "vision_servo");
+                servo= hardwareMap.get(Servo.class, "right_claw_servo");
+
+
         }
 
         /**
@@ -39,6 +45,7 @@ public class ServoTest extends OpMode {
                 telemetry.addData("servo pos",servo.getPosition());
                 telemetry.addData("desired pos", pos);
                 telemetry.update();
+                sleep(15);
 
         }
 }

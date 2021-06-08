@@ -49,6 +49,7 @@ public class BlueLeftZeroMidParkCommand extends SequentialCommandGroup {
                 new DriveForwardCommand(drivetrain, -40),
                 new WaitCommand(10000),
                 new InstantCommand(intake::intake, intake),
+                new TurnToCommand(drivetrain, 235),
                 new SplineCommand(drivetrain, new Vector2d(15, -48), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
 

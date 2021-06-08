@@ -110,7 +110,7 @@ public class InceptionBlueCompAuto extends MatchOpMode {
                             new LeftBlueFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
-                            new LeftBlueOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new InceptionBlueOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
                             new InceptionBlueZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)

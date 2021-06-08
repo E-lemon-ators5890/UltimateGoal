@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.right;
+package org.firstinspires.ftc.teamcode.inperson.blue.left;
 
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
@@ -20,8 +20,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class RedRightZeroMidParkCommand extends SequentialCommandGroup {
-    public RedRightZeroMidParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class BlueLeftOneWallParkCommand extends SequentialCommandGroup {
+    public BlueLeftOneWallParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 
@@ -38,21 +38,33 @@ public class RedRightZeroMidParkCommand extends SequentialCommandGroup {
                 // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                //new TurnToGoalCommand(drivetrain, vision, 195),
-                new TurnToCommand(drivetrain, 197),
+                new TurnToCommand(drivetrain, 170),
+
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 3),
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
-                new SplineCommand(drivetrain, new Vector2d(20, -8), Math.toRadians(0), true),
-                new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -40),
-                new WaitCommand(10000),
-                new InstantCommand(intake::intake, intake),
-                new TurnToCommand(drivetrain, 120),
-                new SplineCommand(drivetrain, new Vector2d(12, 24), Math.toRadians(180)),
                 new TurnToCommand(drivetrain, 180),
+                new DriveForwardCommand(drivetrain, -50),
+                new TurnToCommand(drivetrain, 225),
+                new DriveForwardCommand(drivetrain, 7),
+                new PlaceWobbleGoal(wobbleGoalArm),
+                new WaitCommand(500),
+                new DriveForwardCommand(drivetrain, -7),
+                new TurnToCommand(drivetrain, 180),
+                new DriveForwardCommand(drivetrain, 40),
+                new TurnCommand(drivetrain, 90),
+                new DriveForwardCommand(drivetrain, -10),
+
+
                 new InstantCommand(intake::stop, intake)
+
+
+
+
+
+
+
         );
     }
 }
