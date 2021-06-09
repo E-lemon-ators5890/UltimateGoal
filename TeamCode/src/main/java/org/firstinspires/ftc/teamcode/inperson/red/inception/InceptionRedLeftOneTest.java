@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 @Autonomous(name = "RED Left One Test", group = "RED")
-@Disabled
+//@Disabled
 public class InceptionRedLeftOneTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

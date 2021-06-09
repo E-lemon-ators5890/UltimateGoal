@@ -7,7 +7,6 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -20,9 +19,9 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-@Autonomous(name = "Blue Left Zero Mid Park Test", group = "Blue")
-@Disabled
-public class BlueLeftZeroAltParkTest extends MatchOpMode {
+@Autonomous(name = "Blue Left Test", group = "Blue")
+//@Disabled
+public class BlueLeftTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
@@ -77,7 +76,7 @@ public class BlueLeftZeroAltParkTest extends MatchOpMode {
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new BlueLeftZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        schedule(new BlueLeftZeroWallParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

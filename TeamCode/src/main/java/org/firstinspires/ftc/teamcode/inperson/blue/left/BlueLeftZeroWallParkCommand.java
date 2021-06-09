@@ -20,8 +20,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class BlueLeftZeroCommand extends SequentialCommandGroup {
-    public BlueLeftZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class BlueLeftZeroWallParkCommand extends SequentialCommandGroup {
+    public BlueLeftZeroWallParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 

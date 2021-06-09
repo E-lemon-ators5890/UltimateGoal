@@ -31,7 +31,9 @@ public class MegaknightsRedFourCommand extends SequentialCommandGroup {
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
-                // Spin up wheelsnew WaitCommand(12000),
+                new WaitCommand(12000),
+
+                // Spin up wheels new WaitCommand(12000),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
                 // Drive to Spot
@@ -42,15 +44,24 @@ public class MegaknightsRedFourCommand extends SequentialCommandGroup {
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 3),
                 //Place Wobble Goal
-                new TurnToCommand(drivetrain, 180),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                //new InstantCommand(wobbleGoalArm::setTurretDiagonalRed,wobbleGoalArm),
-                new TurnCommand(drivetrain, 185),
-                new DriveForwardCommand(drivetrain, 45),
+                new DriveForwardCommand(drivetrain, -60),
+
+                new TurnToCommand(drivetrain, 270),
+                new DriveForwardCommand(drivetrain, 5),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain,-41)
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm)
+                new WaitCommand(500),
+                new DriveForwardCommand(drivetrain, -2),
+                new TurnToCommand(drivetrain, 180),
+                //replace with a spline later
+                new DriveForwardCommand(drivetrain, 48),
+                new TurnCommand(drivetrain, -90),
+                new DriveForwardCommand(drivetrain, -10),
+
+
+                new InstantCommand(intake::stop, intake)
+
 
 
 

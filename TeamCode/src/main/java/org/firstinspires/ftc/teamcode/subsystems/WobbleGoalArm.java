@@ -23,7 +23,7 @@ public class WobbleGoalArm extends SubsystemBase {
     private MotorEx arm;
     private TouchSensor homeSwitch;
     public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.01, 0.000, 0.00, 0);
-    public static double ARM_OFFSET = -167.6346015793252;
+    public static double ARM_OFFSET = -150.6346015793252;
     private PIDFController controller;
     private ServoEx leftClaw, rightClaw;
     private boolean automatic;
@@ -116,12 +116,12 @@ public class WobbleGoalArm extends SubsystemBase {
     public void liftWobbleGoal() {
 
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 25);
+        controller.setSetPoint(ARM_OFFSET + 2);
     }
     public void midWobbleGoal() {
 
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 60);
+        controller.setSetPoint(ARM_OFFSET + 50);
     }
     public void setWobbleGoal(double angle) {
         automatic = true;
@@ -135,8 +135,8 @@ public class WobbleGoalArm extends SubsystemBase {
         leftClaw.setPosition(leftPosition);
         rightClaw.setPosition(rightPosition);
     }
-    //get servo positions
-    public void closeClaw() { setClawPosition(0.48, 0.92); }
+
+    public void closeClaw() { setClawPosition(0.5250 , 0.92); }
     public void openClaw() { setClawPosition(0.9125, 0.54); }
 
     public void setOffset() {

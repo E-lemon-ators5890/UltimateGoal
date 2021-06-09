@@ -52,6 +52,7 @@ public class MegaknightsBlueFourCommand extends SequentialCommandGroup {
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
                 new TurnToCommand(drivetrain, 180),
+                //replace with a spline later
                 new DriveForwardCommand(drivetrain, 48),
                 new TurnCommand(drivetrain, 90),
                 new DriveForwardCommand(drivetrain, -10),

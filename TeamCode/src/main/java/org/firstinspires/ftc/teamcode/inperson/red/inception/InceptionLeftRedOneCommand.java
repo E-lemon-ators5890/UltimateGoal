@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SplineCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
@@ -49,7 +50,7 @@ public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
                 new SplineCommand(drivetrain, new Vector2d(35, 4), Math.toRadians(0), true),
 
                 //new InstantCommand(wobbleGoalArm::setTurretFarRight, wobbleGoalArm),
-                new TurnToCommand(drivetrain, 165),
+                new TurnCommand(drivetrain, 90),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
