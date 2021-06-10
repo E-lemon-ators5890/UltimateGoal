@@ -22,7 +22,7 @@ public class ServoTest extends OpMode {
          */
         @Override
         public void init() {
-                servo= hardwareMap.get(Servo.class, "right_claw_servo");
+                servo= hardwareMap.get(Servo.class, "intake_wall_servo");
 
 
         }

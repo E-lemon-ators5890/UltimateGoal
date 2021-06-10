@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-@Autonomous(name = "Inception Zero Test", group = "RED")
-@Disabled
+@Autonomous(name = "Inception Red Zero Test", group = "RED")
+//@Disabled
 public class InceptionRedLeftZeroTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

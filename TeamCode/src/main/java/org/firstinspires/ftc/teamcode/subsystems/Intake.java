@@ -35,7 +35,7 @@ public class Intake extends SubsystemBase {
         intake.set(speed);
     }
     public void dropIntake() {
-        servo.setPosition(0.58);
+        servo.setPosition(0.408);
     }
     public void autodropIntake() {
         servo.setPosition(0.38);

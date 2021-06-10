@@ -108,7 +108,7 @@ public class WobbleGoalArm extends SubsystemBase {
 
     /************************************************************************************************/
     public void placeWobbleGoal() {
-        // TODO CHNAGNE
+        // TODO CHANGE
 
         automatic = true;
         controller.setSetPoint(0);
@@ -121,7 +121,7 @@ public class WobbleGoalArm extends SubsystemBase {
     public void midWobbleGoal() {
 
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 50);
+        controller.setSetPoint(ARM_OFFSET + 45);
     }
     public void setWobbleGoal(double angle) {
         automatic = true;

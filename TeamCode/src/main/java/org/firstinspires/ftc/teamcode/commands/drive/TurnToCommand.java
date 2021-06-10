@@ -14,6 +14,14 @@ public class TurnToCommand extends CommandBase {
     private final double angle;
     double desired, firstAngle;
     boolean weird = false;
+
+    public static int redRightAngle = 197;
+    public static int redLeftAngle = 172;
+    //change
+    public static int blueRightAngle = 0;
+    public static int blueLeftAngle = 172;
+
+
     Telemetry tl;
     public TurnToCommand(Drivetrain drive, double angle) {
         this.drive = drive;

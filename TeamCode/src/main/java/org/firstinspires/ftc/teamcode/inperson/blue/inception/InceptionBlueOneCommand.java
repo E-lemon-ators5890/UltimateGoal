@@ -20,6 +20,11 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redRightAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLeftAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
+
 public class InceptionBlueOneCommand extends SequentialCommandGroup {
     public InceptionBlueOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
@@ -31,6 +36,7 @@ public class InceptionBlueOneCommand extends SequentialCommandGroup {
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
+                new WaitCommand(12000),
 
                 // Spin up wheels
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
@@ -38,7 +44,7 @@ public class InceptionBlueOneCommand extends SequentialCommandGroup {
                 // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                new TurnToCommand(drivetrain, 170),
+                new TurnToCommand(drivetrain, blueLeftAngle),
 
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 3),

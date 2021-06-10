@@ -20,6 +20,11 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redRightAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLeftAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
+
 public class MegaknightsBlueFourCommand extends SequentialCommandGroup {
     public MegaknightsBlueFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
@@ -32,20 +37,20 @@ public class MegaknightsBlueFourCommand extends SequentialCommandGroup {
                 new InstantCommand(feeder::retractFeed),
 
                 // Spin up wheels
-                new WaitCommand(12000),
+                new WaitCommand(13000),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
                 // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                new TurnToCommand(drivetrain, 170),
+                new TurnToCommand(drivetrain, blueLeftAngle),
 
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 3),
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new TurnToCommand(drivetrain, 180),
-                new DriveForwardCommand(drivetrain, -60),
+                new DriveForwardCommand(drivetrain, -62),
 
                 new TurnToCommand(drivetrain, 90),
                 new DriveForwardCommand(drivetrain, -7),
@@ -53,7 +58,7 @@ public class MegaknightsBlueFourCommand extends SequentialCommandGroup {
                 new WaitCommand(500),
                 new TurnToCommand(drivetrain, 180),
                 //replace with a spline later
-                new DriveForwardCommand(drivetrain, 48),
+                new DriveForwardCommand(drivetrain, 36),
                 new TurnCommand(drivetrain, 90),
                 new DriveForwardCommand(drivetrain, -10),
 
