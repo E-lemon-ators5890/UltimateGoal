@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.megaknytes;
+package org.firstinspires.ftc.teamcode.inperson.red.lightsaders;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -12,18 +12,23 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
-import org.firstinspires.ftc.teamcode.inperson.red.megaknytes.RightRedPSFourCommand;
+import org.firstinspires.ftc.teamcode.inperson.red.megaknytes.MegaknightsRedZeroCommand;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
+import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
+import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-@Autonomous(name = "RED Right PS Four Test", group = "RED")
-@Disabled
-public class RedRightPSFourTest extends MatchOpMode {
+import java.util.logging.Level;
+
+@Autonomous(name = "RED Lightsaders Test", group = "RED")
+//@Disabled
+public class LightsadersRedTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
@@ -45,7 +50,7 @@ public class RedRightPSFourTest extends MatchOpMode {
     private ShooterFeeder feeder;
     private Intake intake;
     private WobbleGoalArm wobbleGoalArm;
-
+    private Vision vision;
     @Override
     public void robotInit() {
 // Drivetrain Hardware Initializations
@@ -72,13 +77,20 @@ public class RedRightPSFourTest extends MatchOpMode {
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(arm, leftClawServo, rightClawServo, wobbleTouchSensor, telemetry);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.RED_ONLY);
+    }
 
+    @Override
+    public void robotPeriodic() {
+        super.robotPeriodic();
+        Util.logger(this, Level.INFO, "Target angle", vision.getHighGoalAngle());
     }
 
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new RightRedPSFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        //vision.switchToHG();
+        schedule(new LightsadersRedFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

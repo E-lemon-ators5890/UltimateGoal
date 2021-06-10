@@ -18,10 +18,6 @@ import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
-import org.firstinspires.ftc.teamcode.inperson.blue.LeftBlueZeroCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.LeftBlueFourCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.LeftBlueOneCommand;
-import org.firstinspires.ftc.teamcode.inperson.red.megaknytes.MegaknightsRedFourCommand;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
@@ -36,7 +32,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-@Autonomous(name = "Megaknytes Competition Autonomous (Blue Left)", group = "Blue")
+@Autonomous(name = "MegaKnytes Competition Autonomous (Blue Left)", group = "Blue")
 public class MegaknytesBlueCompAuto extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

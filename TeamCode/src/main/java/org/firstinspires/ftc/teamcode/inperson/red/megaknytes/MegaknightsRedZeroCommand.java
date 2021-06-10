@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.inperson.red.megaknytes;
 
+//tested with them
+
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -33,7 +35,6 @@ public class MegaknightsRedZeroCommand extends SequentialCommandGroup {
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-
                 // Setup
                 //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),

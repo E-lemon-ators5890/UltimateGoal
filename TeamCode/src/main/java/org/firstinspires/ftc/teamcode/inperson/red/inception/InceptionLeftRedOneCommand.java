@@ -25,12 +25,13 @@ import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLef
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
 
+//tested with them
+
 @Config
 public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
     public static int HG_SPEED = 3450;
     public static int POWERSHOT_SPEED = 2850;
     public InceptionLeftRedOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
-
 
         addCommands(
                 // Setup
@@ -49,7 +50,6 @@ public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
                 // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
 
-
                 //Placek Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new SplineCommand(drivetrain, new Vector2d(35, 4), Math.toRadians(0), true),
@@ -63,7 +63,6 @@ public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
                 new WaitCommand(500),
                 new SplineCommand(drivetrain, new Vector2d(11, 8), Math.toRadians(180))
 
-
-                );
+        );
     }
 }

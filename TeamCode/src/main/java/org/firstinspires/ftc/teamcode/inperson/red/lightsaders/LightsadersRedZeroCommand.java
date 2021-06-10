@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.inperson.red.lightsaders;
 
+//tested with them
+
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -33,7 +35,6 @@ public class LightsadersRedZeroCommand extends SequentialCommandGroup {
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-
                 // Setup
                 //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
@@ -60,13 +61,6 @@ public class LightsadersRedZeroCommand extends SequentialCommandGroup {
                 new DriveForwardCommand(drivetrain, -3),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, -3)
-
-
-
-
-
-
-
 
         );
     }

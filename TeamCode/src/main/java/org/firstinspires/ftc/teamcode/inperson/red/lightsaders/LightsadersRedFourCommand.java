@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.inperson.red.lightsaders;
 
+//tested with them
+
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -66,19 +68,7 @@ public class LightsadersRedFourCommand extends SequentialCommandGroup {
                 new TurnCommand(drivetrain, -90),
                 new DriveForwardCommand(drivetrain, -10),
 
-
                 new InstantCommand(intake::stop, intake)
-
-
-
-
-
-
-
-
-
-
-
 
         );
     }

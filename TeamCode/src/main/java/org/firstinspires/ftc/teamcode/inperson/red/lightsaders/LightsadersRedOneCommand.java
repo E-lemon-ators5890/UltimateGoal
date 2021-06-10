@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.inperson.red.lightsaders;
 
+//tested with them
+
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -66,16 +68,6 @@ public class LightsadersRedOneCommand extends SequentialCommandGroup {
                 new SplineCommand(drivetrain, new Vector2d(15.5, -10), Math.toRadians(0)),
                 // new DriveForwardCommand(drivetrain, 30),
                 new TurnToCommand(drivetrain,0, true)
-
-                // new DriveForwardCommand(drivetrain, 10)
-
-
-
-
-
-
-
-
 
         );
     }

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.inperson.red.megaknytes;
 
+//tested with them
+
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -50,7 +52,6 @@ public class MegaknightsRedOneCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 170),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new DriveForwardCommand(drivetrain, -56),
-                //new InstantCommand(wobbleGoalArm::setTurretLeft,wobbleGoalArm),
                 new TurnToCommand(drivetrain, 135),
                 new DriveForwardCommand(drivetrain, 7),
                 new PlaceWobbleGoal(wobbleGoalArm),
@@ -59,20 +60,8 @@ public class MegaknightsRedOneCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new SplineCommand(drivetrain, new Vector2d(15.5, -10), Math.toRadians(0)),
-                // new DriveForwardCommand(drivetrain, 30),
                 new TurnToCommand(drivetrain,0, true)
-
-                // new DriveForwardCommand(drivetrain, 10)
-
-
-
-
-
-
-
-
 
         );
     }

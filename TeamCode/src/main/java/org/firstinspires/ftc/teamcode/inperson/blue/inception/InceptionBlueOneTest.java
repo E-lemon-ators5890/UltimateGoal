@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.inperson.blue.inception;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.arcrobotics.ftclib.command.Command;
-import com.arcrobotics.ftclib.command.SelectCommand;
-import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
@@ -18,14 +15,8 @@ import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
-import org.firstinspires.ftc.teamcode.inperson.blue.LeftBlueZeroCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.RightBlueZeroCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.LeftBlueFourCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.LeftBlueOneCommand;
-import org.firstinspires.ftc.teamcode.inperson.red.megaknytes.MegaknightsRedFourCommand;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
-import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
@@ -34,7 +25,6 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-import java.util.HashMap;
 import java.util.logging.Level;
 
 @Autonomous(name = "Inception Blue One Test", group = "Blue")
