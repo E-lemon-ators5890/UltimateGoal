@@ -17,8 +17,7 @@ public class TurnToCommand extends CommandBase {
 
     public static int redRightAngle = 197;
     public static int redLeftAngle = 172;
-    //change
-    public static int blueRightAngle = 0;
+    public static int blueRightAngle = 195;
     public static int blueLeftAngle = 172;
 
 

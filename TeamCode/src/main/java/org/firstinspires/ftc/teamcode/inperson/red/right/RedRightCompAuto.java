@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.megaknytes;
+package org.firstinspires.ftc.teamcode.inperson.red.right;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
@@ -32,8 +32,8 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-@Autonomous(name = "Megaknytes Competition Autonomous (Red Right)", group = "Red")
-public class MegaknytesRedCompetitionAuto extends MatchOpMode {
+@Autonomous(name = "Red Right Competition Autonomous", group = "Red")
+public class RedRightCompAuto extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
@@ -107,15 +107,15 @@ public class MegaknytesRedCompetitionAuto extends MatchOpMode {
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new ParallelCommandGroup(
                             new InstantCommand(vision::switchToHG, vision),
-                            new MegaknightsRedFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new RedRightFourWallParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new ParallelCommandGroup(
                             new InstantCommand(vision::switchToHG, vision),
-                            new MegaknightsRedOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new RedRightOneWallParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new ParallelCommandGroup(
                             new InstantCommand(vision::switchToHG, vision),
-                            new MegaknightsRedZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightZeroMidParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                 }}, vision::getCurrentStack)
         );

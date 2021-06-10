@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.left;
+package org.firstinspires.ftc.teamcode.inperson.blue.right;
 
 //untested
 
@@ -27,8 +27,8 @@ import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLef
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
 
-public class BlueLeftOneFarParkCommand extends SequentialCommandGroup {
-    public BlueLeftOneFarParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class BlueRightZeroFarParkCommand extends SequentialCommandGroup {
+    public BlueRightZeroFarParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 
@@ -45,25 +45,32 @@ public class BlueLeftOneFarParkCommand extends SequentialCommandGroup {
                 // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                new TurnToCommand(drivetrain, blueLeftAngle),
-
+                new TurnToCommand(drivetrain, blueRightAngle),
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 3),
                 //Place Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
-                new TurnToCommand(drivetrain, 180),
-                new DriveForwardCommand(drivetrain, -50),
-                new TurnToCommand(drivetrain, 225),
-                new DriveForwardCommand(drivetrain, 7),
-                new PlaceWobbleGoal(wobbleGoalArm),
-                new WaitCommand(500),
-                new DriveForwardCommand(drivetrain, -7),
-                new TurnToCommand(drivetrain, 180),
 
-                //spline to park far
-                new SplineCommand(drivetrain, new Vector2d(15, -38), Math.toRadians(180)),
+
+
+
+
+
+
+
+
+
 
                 new InstantCommand(intake::stop, intake)
+
+
+
+
+
+
+
+
+
 
 
         );
