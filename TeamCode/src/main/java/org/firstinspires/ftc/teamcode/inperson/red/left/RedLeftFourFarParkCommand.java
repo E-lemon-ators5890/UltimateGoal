@@ -33,7 +33,9 @@ public class RedLeftFourFarParkCommand extends SequentialCommandGroup {
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
+                //new WaitCommand(5000),
                 // Setup
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -45,24 +47,20 @@ public class RedLeftFourFarParkCommand extends SequentialCommandGroup {
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
                 new TurnToCommand(drivetrain, redLeftAngle),
 
-                // Shoot 3 rings
+                // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
+
+                //Placek Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
 
-                //Place Wobble Goal
-                new TurnToCommand(drivetrain, 180),
-
-
-
-
-
-
-
-
-
-
-                new InstantCommand(intake::stop, intake)
-
+                new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm),
+                new SplineCommand(drivetrain, new Vector2d(64, -21), 0, true),
+                new TurnCommand(drivetrain, 90),
+                new PlaceWobbleGoal(wobbleGoalArm),
+                new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                new DriveForwardCommand(drivetrain, -4),
+                new SplineCommand(drivetrain, new Vector2d(11, 18), Math.toRadians(180), true)
 
 
 

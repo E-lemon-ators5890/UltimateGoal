@@ -35,21 +35,22 @@ public class RedRightOneWallParkCommand extends SequentialCommandGroup {
 
         addCommands(
                 new RightRedShootingSequence(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry),
+                new TurnToCommand(drivetrain, 180),
 
                 //Place Wobble Goal
-                new DriveForwardCommand(drivetrain, -56),
-                new TurnToCommand(drivetrain, 135),
-                new DriveForwardCommand(drivetrain, 7),
+                new DriveForwardCommand(drivetrain, -52),
+                new TurnToCommand(drivetrain, 145),
+                new DriveForwardCommand(drivetrain, 2),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
-                new DriveForwardCommand(drivetrain, -7),
+                new DriveForwardCommand(drivetrain, -6),
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
 
 
                 //spline to park
-                new SplineCommand(drivetrain, new Vector2d(15, -5), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(15, -8), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
 
         );

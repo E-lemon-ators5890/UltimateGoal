@@ -34,21 +34,29 @@ public class RedLeftZeroMidParkCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
-                // Spin up wheels
+                // Spkin up wkheels
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
-                // Drive to Spot
+                // Drikve tko Skpot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                //new TurnToGoalCommand(drivetrain, vision, 195),
                 new TurnToCommand(drivetrain, redLeftAngle),
-                // Shoot 3 rings
+
+                // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
-                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels)
-                //Place Wobble Goal
+
+                //Placek Wobble Goal
+                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
+                new TurnToCommand(drivetrain, 190),
+                new TurnCommand(drivetrain, 100),
+                new DriveForwardCommand(drivetrain, 25),
+                new PlaceWobbleGoal(wobbleGoalArm),
+                new TurnCommand(drivetrain, -30),
+                new DriveForwardCommand(drivetrain, -8)
 
         );
     }

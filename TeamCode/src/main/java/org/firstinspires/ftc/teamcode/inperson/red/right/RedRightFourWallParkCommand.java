@@ -35,6 +35,7 @@ public class RedRightFourWallParkCommand extends SequentialCommandGroup {
 
         addCommands(
                 new RightRedShootingSequence(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry),
+                new TurnToCommand(drivetrain, 180),
 
                 //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, -60),
@@ -46,7 +47,7 @@ public class RedRightFourWallParkCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 180),
 
                 //spline to park
-                new SplineCommand(drivetrain, new Vector2d(15, -5), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(20, -5), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
         );
     }
