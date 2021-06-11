@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.arcrobotics.ftclib.util.InterpLUT;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -37,6 +38,7 @@ public class Vision extends SubsystemBase {
 
     private boolean runningRingDetector;
 
+    public InterpLUT lut = new InterpLUT();
 
     private double homepos = 0.41;
     private double homeViz = .12;
@@ -57,7 +59,7 @@ public class Vision extends SubsystemBase {
         if (color == UGBasicHighGoalPipeline.Mode.RED_ONLY)
             goalDetector.setXOffset(-30);
         else
-            goalDetector.setXOffset(-38);
+            goalDetector.setXOffset(-28);
         runningRingDetector = initRing;
 
         if (runningRingDetector) {
@@ -67,6 +69,7 @@ public class Vision extends SubsystemBase {
             switchableWebcam = OpenCvCameraFactory.getInstance().createSwitchableWebcam(cameraMonitorViewId, goalCamera, ringCamera);
             switchableWebcam.setPipeline(goalDetector);
         }
+        switchableWebcam.showFpsMeterOnViewport(false);
         switchableWebcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
@@ -78,6 +81,14 @@ public class Vision extends SubsystemBase {
         });
         switchableWebcam.openCameraDevice();
 
+        //Adding each val with a key
+        lut.add(58, ShooterWheels.TARGET_SPEED);
+        lut.add(74, 3100);
+        lut.add(88, 3250);
+        lut.add(110, 3400);
+        lut.add(130, 3500);
+
+        lut.createLUT();
     }
     public Vision(HardwareMap hw, String ringWebcam, String goalWebcam, Telemetry tl, double top, double bottom, double width, UGBasicHighGoalPipeline.Mode color) {
         this(hw, ringWebcam, goalWebcam, tl, top, bottom, width, color, true);
