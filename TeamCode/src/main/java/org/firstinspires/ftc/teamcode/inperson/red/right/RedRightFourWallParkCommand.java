@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.commands.drive.SplineCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
+import org.firstinspires.ftc.teamcode.inperson.red.RightRedShootingSequence;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
@@ -33,24 +34,7 @@ public class RedRightFourWallParkCommand extends SequentialCommandGroup {
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-                // Setup
-                new InstantCommand(wobbleGoalArm::closeClaw),
-                new InstantCommand(feeder::retractFeed),
-
-
-                // Spin up wheels
-                new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
-
-                // Drive to Spot
-                new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
-                        new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-
-                //new TurnToGoalCommand(drivetrain, vision, 195),
-                new TurnToCommand(drivetrain, redRightAngle),
-
-                // Shoot 3 rings
-                new FeedRingsCommand(feeder, 3),
-                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
+                new RightRedShootingSequence(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry),
 
                 //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, -60),
