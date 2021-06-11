@@ -120,7 +120,7 @@ public class WobbleGoalArm extends SubsystemBase {
     public void midWobbleGoal() {
 
         automatic = true;
-        controller.setSetPoint(ARM_OFFSET + 40);
+        controller.setSetPoint(ARM_OFFSET + 45);
     }
     public void setWobbleGoal(double angle) {
         automatic = true;
@@ -135,8 +135,8 @@ public class WobbleGoalArm extends SubsystemBase {
         rightClaw.setPosition(rightPosition);
     }
     //get servo positions
-    public void openClaw() { setClawPosition(.75, .75); }
-    public void closeClaw() { setClawPosition(0.32, .32); }
+    public void closeClaw() { setClawPosition(0.5250 , 0.92); }
+    public void openClaw() { setClawPosition(0.9125, 0.54); }
 
     public void setOffset() {
         resetEncoder();
