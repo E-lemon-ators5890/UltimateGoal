@@ -37,7 +37,6 @@ public class Vision extends SubsystemBase {
 
     private boolean runningRingDetector;
 
-    private ServoEx poggers;
 
     private double homepos = 0.41;
     private double homeViz = .12;
@@ -46,8 +45,6 @@ public class Vision extends SubsystemBase {
 
         ringCamera = hw.get(WebcamName.class, "webcam");
         goalCamera = hw.get(WebcamName.class, "webcam1");
-        poggers = new SimpleServo(hw, "vision_servo", 0, 180);
-        poggers.setPosition(homepos);
 
         int cameraMonitorViewId = hw.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hw.appContext.getPackageName());
 
@@ -112,18 +109,13 @@ public class Vision extends SubsystemBase {
             Util.logger(this, telemetry, Level.INFO, "Bottom", ringPipeline.getBottomAverage());
             Util.logger(this, telemetry, Level.INFO, "Top", ringPipeline.getTopAverage());
 
-            poggers.setPosition(homepos);
         }
 
         if (isRunningHGDetector()) {
             Util.logger(this, telemetry, Level.INFO, "Goal yaw (0 if not visible)", goalDetector.getTargetAngle());
             Util.logger(this, telemetry, Level.INFO, "Goal pitch (0 if not visible)", goalDetector.getTargetPitch());
+            Util.logger(this, telemetry, Level.INFO, "Distance to Goal", goalDetector.getDistance());
             Util.logger(this, telemetry, Level.INFO, "Offset", goalDetector.getxOffset());
-            if(goalDetector.isTargetVisible()) {
-                poggers.setPosition(homeViz);
-            } else {
-                poggers.setPosition(homepos);
-            }
         }
 
     }
@@ -145,6 +137,7 @@ public class Vision extends SubsystemBase {
     }
 
     public double getHighGoalAngle() { return goalDetector.getTargetAngle(); }
+    public double getHighGoalDistance() { return goalDetector.getDistance(); }
     public boolean isTargetVisible() {
         return goalDetector.isTargetVisible();
     }

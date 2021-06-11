@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.pipelines;
 
 
-public class CompHGPipeline extends UGAngleHighGoalPipeline {
+public class CompHGPipeline extends UGDistanceHighGoalPipeline {
     private UGBasicHighGoalPipeline.Mode color;
     public CompHGPipeline(UGBasicHighGoalPipeline.Mode color) {
-        super(55, color);
+        super(color);
         this.color = color;
     }
 
@@ -14,11 +14,9 @@ public class CompHGPipeline extends UGAngleHighGoalPipeline {
     public double getTargetPitch() {
         return calculatePitch(color);
     }
-    public boolean isTargetVisible() {
-        if (color == UGBasicHighGoalPipeline.Mode.RED_ONLY)
-            return isRedVisible();
-        return isBlueVisible();
-    }
 
+    public boolean isTargetVisible() {
+        return isTargetVisible(color);
+    }
 
 }
