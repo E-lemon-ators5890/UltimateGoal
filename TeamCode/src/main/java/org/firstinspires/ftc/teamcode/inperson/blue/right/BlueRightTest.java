@@ -56,7 +56,7 @@ public class BlueRightTest extends MatchOpMode {
 
         feedServo = new SimpleServo(hardwareMap, "feed_servo", 0, 230);
 
-        // Wobble Harware initializations
+        // Wobble Hardware initializations
         arm = new MotorEx(hardwareMap, "arm", Motor.GoBILDA.RPM_60);
         leftClawServo = new SimpleServo(hardwareMap, "left_claw_servo", 0, 230);
         rightClawServo = new SimpleServo(hardwareMap, "right_claw_servo", 0, 230);
@@ -76,7 +76,7 @@ public class BlueRightTest extends MatchOpMode {
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new BlueRightZeroMidParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        schedule(new BlueRightFourFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

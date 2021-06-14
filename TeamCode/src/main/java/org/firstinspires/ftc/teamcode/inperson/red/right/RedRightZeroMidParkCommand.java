@@ -41,7 +41,7 @@ public class RedRightZeroMidParkCommand extends SequentialCommandGroup {
                 new DriveForwardCommand(drivetrain, -40),
                 new WaitCommand(10000),
                 new InstantCommand(intake::intake, intake),
-                new SplineCommand(drivetrain, new Vector2d(15, 12), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(12, 12), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
 
 

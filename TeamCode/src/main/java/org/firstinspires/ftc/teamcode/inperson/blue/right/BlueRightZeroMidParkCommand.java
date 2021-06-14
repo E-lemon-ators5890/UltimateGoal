@@ -39,30 +39,27 @@ public class BlueRightZeroMidParkCommand extends SequentialCommandGroup {
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
-
-                // Spin up wheels
+                // Spkin up wkheels
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
-                // Drive to Spot
+                // Drikve tko Skpot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
                 new TurnToCommand(drivetrain, blueRightAngle),
-                // Shoot 3 rings
+
+                // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
-                //Place Wobble Goal
+
+                //Placek Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
+                new TurnToCommand(drivetrain, 170),
+                new TurnCommand(drivetrain, -100),
+                new DriveForwardCommand(drivetrain, 25),
+                new PlaceWobbleGoal(wobbleGoalArm),
+                new TurnCommand(drivetrain, 30),
+                new DriveForwardCommand(drivetrain, -10),
+                new TurnToCommand(drivetrain, 0)
 
-
-
-
-
-
-
-
-
-
-
-                new InstantCommand(intake::stop, intake)
 
 
 

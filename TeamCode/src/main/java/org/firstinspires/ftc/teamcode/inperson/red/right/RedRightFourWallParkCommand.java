@@ -47,7 +47,7 @@ public class RedRightFourWallParkCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 180),
 
                 //spline to park
-                new SplineCommand(drivetrain, new Vector2d(20, -5), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(12, -5), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
         );
     }

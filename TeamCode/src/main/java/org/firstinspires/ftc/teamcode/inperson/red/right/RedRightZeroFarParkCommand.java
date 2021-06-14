@@ -42,7 +42,7 @@ public class RedRightZeroFarParkCommand extends SequentialCommandGroup {
                 new WaitCommand(10000),
                 new InstantCommand(intake::intake, intake),
                 new TurnToCommand(drivetrain, 120),
-                new SplineCommand(drivetrain, new Vector2d(12, 24), Math.toRadians(0)),
+                new SplineCommand(drivetrain, new Vector2d(12, 24), Math.toRadians(180)),
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(intake::stop, intake)
         );

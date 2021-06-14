@@ -50,7 +50,7 @@ public class RedRightOneWallParkCommand extends SequentialCommandGroup {
 
 
                 //spline to park
-                new SplineCommand(drivetrain, new Vector2d(15, -8), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(12, -8), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake)
 
         );

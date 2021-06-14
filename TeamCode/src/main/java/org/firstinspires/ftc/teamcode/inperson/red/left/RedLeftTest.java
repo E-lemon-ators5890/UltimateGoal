@@ -78,7 +78,7 @@ public class RedLeftTest extends MatchOpMode {
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new RedLeftFourFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        schedule(new RedLeftFourExtraRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

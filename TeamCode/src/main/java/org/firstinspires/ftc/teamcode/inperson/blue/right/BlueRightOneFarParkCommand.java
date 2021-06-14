@@ -34,9 +34,9 @@ public class BlueRightOneFarParkCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
-
 
                 // Spin up wheels
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
@@ -46,22 +46,21 @@ public class BlueRightOneFarParkCommand extends SequentialCommandGroup {
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
                 new TurnToCommand(drivetrain, blueRightAngle),
 
-                // Shoot 3 rings
+                // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
-                //Place Wobble Goal
+
+                //Placek Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
+                new SplineCommand(drivetrain, new Vector2d(35, -4), Math.toRadians(0), true),
+
+                new TurnCommand(drivetrain, -90),
+                new PlaceWobbleGoal(wobbleGoalArm),
                 new TurnToCommand(drivetrain, 180),
-
-
-
-
-
-
-
-
+                new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
+                new WaitCommand(500),
+                new SplineCommand(drivetrain, new Vector2d(11, -8), Math.toRadians(180)),
 
                 new InstantCommand(intake::stop, intake)
-
         );
     }
 }

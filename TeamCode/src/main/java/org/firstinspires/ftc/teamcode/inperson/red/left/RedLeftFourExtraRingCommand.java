@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.right;
+package org.firstinspires.ftc.teamcode.inperson.red.left;
 
-//untested
+//retest
 
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;
@@ -27,44 +27,58 @@ import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLef
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
 
-public class BlueRightZeroFarParkCommand extends SequentialCommandGroup {
-    public BlueRightZeroFarParkCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
+    public RedLeftFourExtraRingCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
                 // Setup
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
-                // Spkin up wkheels
+                // Spin up wheels
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
-                // Drikve tko Skpot
+                // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                new TurnToCommand(drivetrain, blueRightAngle),
+                new TurnToCommand(drivetrain, redLeftAngle),
 
                 // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
 
                 //Placek Wobble Goal
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
-                new TurnToCommand(drivetrain, 170),
-                new TurnCommand(drivetrain, -100),
-                new DriveForwardCommand(drivetrain, 25),
+
+                new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm),
+                new SplineCommand(drivetrain, new Vector2d(64, -21), 0, true),
+                new TurnCommand(drivetrain, 90),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new TurnCommand(drivetrain, 30),
-                new DriveForwardCommand(drivetrain, -36),
-                new TurnToCommand(drivetrain, 0)
+                new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
+                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+                new DriveForwardCommand(drivetrain, -15),
+                new TurnToCommand(drivetrain, 180),
+                new InstantCommand(intake::intake, intake),
 
+                //go to rings
+                new SplineCommand(drivetrain, new Vector2d(-30, -18), Math.toRadians(180)),
+                new InstantCommand(intake::stop, intake),
+                new WaitCommand(500),
 
+                //drive to line and spin up wheels
+                new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
+                new DriveForwardCommand(drivetrain, -35),
 
+                //turn
+                new TurnToCommand(drivetrain, 177),
 
+                //shoot
+                new FeedRingsCommand(feeder, 2),
+                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
 
-
-
+                //park
+                new DriveForwardCommand(drivetrain, -10)
         );
     }
 }
