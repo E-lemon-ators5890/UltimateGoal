@@ -19,12 +19,12 @@ public class LightSubsystem extends SubsystemBase {
     private WobbleGoalArm wobbleGoalArm;
     private final int SPEED_RANGE = 150;
 
-    public static RevBlinkinLedDriver.BlinkinPattern DEFAULT_PATTERN = RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE;
+    public static RevBlinkinLedDriver.BlinkinPattern DEFAULT_PATTERN = RevBlinkinLedDriver.BlinkinPattern.BLACK;
     public static double test = 0;
     public LightSubsystem(HardwareMap hw, Vision vision, ShooterWheels wheels, WobbleGoalArm wobbleGoalArm) {
         blinkinLedDriver = hw.get(RevBlinkinLedDriver.class, "blinkin");
 
-        pattern = RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
 
         this.vision = vision;
         this.shooterWheels = wheels;

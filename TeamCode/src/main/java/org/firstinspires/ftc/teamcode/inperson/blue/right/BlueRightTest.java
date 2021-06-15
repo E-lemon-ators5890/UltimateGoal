@@ -76,7 +76,7 @@ public class BlueRightTest extends MatchOpMode {
     @Override
     public void matchStart() {
         feeder.retractFeed();
-        schedule(new BlueRightFourFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
+        schedule(new BlueRightFourExtraRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry));
 
     }
 }

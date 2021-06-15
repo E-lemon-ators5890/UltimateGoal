@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.inperson.red.left;
 
-//retest
+//tested
 
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.arcrobotics.ftclib.command.InstantCommand;

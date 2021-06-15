@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.left;
+package org.firstinspires.ftc.teamcode.inperson.blue.right;
 
 //idk what this is
 //possibly copy red inside into this
@@ -10,7 +10,6 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SplineCommand;
@@ -23,13 +22,11 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redRightAngle;
-import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLeftAngle;
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
-import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
+import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLeftAngle;
 
-public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
-    public RedLeftFourExtraRingCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class BlueRightFourExtraRingCommand extends SequentialCommandGroup {
+    public BlueRightFourExtraRingCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 
@@ -44,7 +41,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 // Drive to Spot
                 new ParallelCommandGroup(new DriveForwardCommand(drivetrain, -60),
                         new WaitCommand(200).andThen(new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm))),
-                new TurnToCommand(drivetrain, redLeftAngle),
+                new TurnToCommand(drivetrain, blueRightAngle),
 
                 // Shokot 3k ringsk
                 new FeedRingsCommand(feeder, 3),
@@ -53,8 +50,8 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
 
                 new InstantCommand(wobbleGoalArm::midWobbleGoal, wobbleGoalArm),
-                new SplineCommand(drivetrain, new Vector2d(64, -21), 0, true),
-                new TurnCommand(drivetrain, 90),
+                new SplineCommand(drivetrain, new Vector2d(64, 21), 0, true),
+                new TurnCommand(drivetrain, -90),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
                 //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
@@ -63,7 +60,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 new InstantCommand(intake::autodropIntake, intake),
                 new InstantCommand(intake::intake, intake),
                 //go to rings
-                new SplineCommand(drivetrain, new Vector2d(-18, -7), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(-18, 7), Math.toRadians(180)),
                 new WaitCommand(1000),
 
                 //drive to line and spin up wheels
@@ -72,7 +69,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
 
 
                 //shoot
-
+                new TurnToCommand(drivetrain, 187),
                 new FeedRingsCommand(feeder, 5),
                 new TurnToCommand(drivetrain, 180),
                 new WaitCommand(500),
@@ -82,7 +79,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 new WaitCommand(500),
                 //drive to line then shoot
                 new DriveForwardCommand(drivetrain, -40),
-
+                new TurnToCommand(drivetrain, 187),
                 new FeedRingsCommand(feeder, 5),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new InstantCommand(intake::stop, intake),

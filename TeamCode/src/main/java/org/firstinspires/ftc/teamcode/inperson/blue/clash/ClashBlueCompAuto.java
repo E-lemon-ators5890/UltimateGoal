@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.lightsaders;
+package org.firstinspires.ftc.teamcode.inperson.blue.clash;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
@@ -10,7 +10,6 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -19,15 +18,10 @@ import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.InceptionBlueFourCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.InceptionBlueOneCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.inception.InceptionBlueZeroCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.megaknytes.MegaknightsBlueOneCommand;
-import org.firstinspires.ftc.teamcode.inperson.blue.megaknytes.MegaknightsBlueZeroCommand;
-import org.firstinspires.ftc.teamcode.inperson.red.megaknytes.MegaknightsRedFourCommand;
+import org.firstinspires.ftc.teamcode.inperson.red.clash.ClashRedOneCommand;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
-import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
+import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.LightSubsystem;
@@ -39,9 +33,8 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-@Autonomous(name = "Lightsaders Competition Autonomous (Blue Left)", group = "Blue")
-@Disabled
-public class LightsadersBlueCompAuto extends MatchOpMode {
+@Autonomous(name = "Clash Competition Autonomous (Blue Left)", group = "Blue")
+public class ClashBlueCompAuto extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
@@ -97,6 +90,7 @@ public class LightsadersBlueCompAuto extends MatchOpMode {
         vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.BLUE_LEFT_VISION.TOP_HEIGHT, VisionConstants.BLUE_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.BLUE_LEFT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.BLUE_ONLY);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
         lights = new LightSubsystem(hardwareMap, vision, shooterWheels, wobbleGoalArm);
+
     }
 
     @Override
@@ -112,13 +106,13 @@ public class LightsadersBlueCompAuto extends MatchOpMode {
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
-                            new LightsadersBlueFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new ClashBlueFourRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
-                            new LightsadersBlueOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new ClashBlueOneRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
-                            new LightsadersBlueZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new ClashBlueZeroRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                 }}, vision::getCurrentStack)
         );
