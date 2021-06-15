@@ -35,7 +35,6 @@ public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
 
         addCommands(
                 // Setup
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle),
                 new InstantCommand(wobbleGoalArm::closeClaw),
                 new InstantCommand(feeder::retractFeed),
 
@@ -59,7 +58,6 @@ public class InceptionLeftRedOneCommand extends SequentialCommandGroup {
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
-                //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
                 new WaitCommand(500),
                 new SplineCommand(drivetrain, new Vector2d(11, 8), Math.toRadians(180))
 

@@ -57,12 +57,11 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
                 //new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -15),
+                new DriveForwardCommand(drivetrain, -6),
                 new TurnToCommand(drivetrain, 180),
                 new InstantCommand(intake::intake, intake),
-
                 //go to rings
-                new SplineCommand(drivetrain, new Vector2d(-30, -18), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(20, -22), Math.toRadians(180)),
                 new InstantCommand(intake::stop, intake),
                 new WaitCommand(500),
 
@@ -79,6 +78,10 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
 
                 //park
                 new DriveForwardCommand(drivetrain, -10)
+
+
+
+
         );
     }
 }

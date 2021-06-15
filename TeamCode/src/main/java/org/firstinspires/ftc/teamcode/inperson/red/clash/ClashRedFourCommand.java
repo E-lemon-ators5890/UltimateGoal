@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.megaknytes;
+package org.firstinspires.ftc.teamcode.inperson.red.clash;
 
 //tested with them
 
@@ -28,8 +28,8 @@ import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.redLef
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueRightAngle;
 import static org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand.blueLeftAngle;
 
-public class MegaknightsRedFourCommand extends SequentialCommandGroup {
-    public MegaknightsRedFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
+public class ClashRedFourCommand extends SequentialCommandGroup {
+    public ClashRedFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
         final int HG_SPEED = 3450;
         final int POWERSHOT_SPEED = 3000;
 

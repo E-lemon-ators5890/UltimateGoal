@@ -41,7 +41,7 @@ public class MegaknightsRedZeroCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, 170),
                 new DriveForwardCommand(drivetrain, -15),
                 new TurnCommand(drivetrain,90),
-                new DriveForwardCommand(drivetrain, -5),
+                new DriveForwardCommand(drivetrain, -10),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, -3)
 
