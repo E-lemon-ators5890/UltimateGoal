@@ -60,7 +60,7 @@ public class BlueRightFourExtraRingCommand extends SequentialCommandGroup {
                 new InstantCommand(intake::autodropIntake, intake),
                 new InstantCommand(intake::intake, intake),
                 //go to rings
-                new SplineCommand(drivetrain, new Vector2d(-18, 7), Math.toRadians(180)),
+                new SplineCommand(drivetrain, new Vector2d(-18, -1), Math.toRadians(180)),
                 new WaitCommand(1000),
 
                 //drive to line and spin up wheels
@@ -69,7 +69,6 @@ public class BlueRightFourExtraRingCommand extends SequentialCommandGroup {
 
 
                 //shoot
-                new TurnToCommand(drivetrain, 187),
                 new FeedRingsCommand(feeder, 5),
                 new TurnToCommand(drivetrain, 180),
                 new WaitCommand(500),
@@ -79,7 +78,7 @@ public class BlueRightFourExtraRingCommand extends SequentialCommandGroup {
                 new WaitCommand(500),
                 //drive to line then shoot
                 new DriveForwardCommand(drivetrain, -40),
-                new TurnToCommand(drivetrain, 187),
+
                 new FeedRingsCommand(feeder, 5),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new InstantCommand(intake::stop, intake),

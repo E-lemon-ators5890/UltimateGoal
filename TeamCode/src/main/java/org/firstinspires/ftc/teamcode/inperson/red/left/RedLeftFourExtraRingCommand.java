@@ -72,7 +72,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
 
 
                 //shoot
-
+                new TurnToCommand(drivetrain, 177),
                 new FeedRingsCommand(feeder, 5),
                 new TurnToCommand(drivetrain, 180),
                 new WaitCommand(500),
@@ -82,7 +82,7 @@ public class RedLeftFourExtraRingCommand extends SequentialCommandGroup {
                 new WaitCommand(500),
                 //drive to line then shoot
                 new DriveForwardCommand(drivetrain, -40),
-
+                new TurnToCommand(drivetrain, 177),
                 new FeedRingsCommand(feeder, 5),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
                 new InstantCommand(intake::stop, intake),

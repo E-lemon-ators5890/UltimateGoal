@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.pipelines;
 
+import android.util.Pair;
+
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
@@ -35,7 +37,6 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
 
     // List to read contours into
     private List<MatOfPoint> currentContours, interiorContours;
-    private MatOfPoint biggestContour;
     private Point blueCenter, redCenter;
     private int xOffset = 0;
 
@@ -53,8 +54,6 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
 
         currentContours = new ArrayList<>(3);
         interiorContours = new ArrayList<>(3);
-
-        biggestContour = new MatOfPoint();
 
         blueCenter = new Point();
         redCenter = new Point();
@@ -151,7 +150,7 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
         Imgproc.findContours(currentThreshold, currentContours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_NONE);
 
         // Creating new list of contours to add suitable high goal candidates (ones that have a child and fit aspect ratio)
-        List<MatOfPoint> filteredContours = new ArrayList<>();
+        List<Pair> filteredContours = new ArrayList<>();
         Imgproc.drawContours(currentChannel, currentContours, -1, new Scalar(255, 0, 0));
         for (int i = 0; i < currentContours.size(); i++) {
             //Filtering out all countours that don't have children.
@@ -161,7 +160,7 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
                 MatOfPoint childContour = currentContours.get((int) hierarchy.get(0, i)[2]);
                 //Further filtering out contours that don't pass this apsect ratio.
                 if (isPossibleContour(currentContour) && Imgproc.contourArea(childContour) > 25) {
-                    filteredContours.add(currentContour);
+                    filteredContours.add(new Pair(currentContour, childContour));
                 }
             }
         }
@@ -169,14 +168,15 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
         if (filteredContours.isEmpty()) {
             return null;
         } else {
-            // Comparing width instead of area because wobble goals that are close to the camera tend to have a large area
-            biggestContour = Collections.max(filteredContours, Comparator.comparingDouble(t0 -> Imgproc.minAreaRect(new MatOfPoint2f(t0.toArray())).size.area()));
 
-            Moments targetMoments = Imgproc.moments(biggestContour);
+            // Comparing width instead of area because wobble goals that are close to the camera tend to have a large area
+            Pair biggestContourPair = Collections.max(filteredContours, Comparator.comparingDouble(t0 -> Imgproc.minAreaRect(new MatOfPoint2f(((MatOfPoint) t0.first).toArray())).size.area()));
+
+            Moments targetMoments = Imgproc.moments(((MatOfPoint) biggestContourPair.second));
             Point targetCenter = new Point((int) (targetMoments.m10 / targetMoments.m00) + xOffset, (int) (targetMoments.m01 / targetMoments.m00));
 
 
-            Rect boundingRect = Imgproc.boundingRect(biggestContour);
+            Rect boundingRect = Imgproc.boundingRect(((MatOfPoint) biggestContourPair.first));
             Imgproc.rectangle(draw, boundingRect, new Scalar(255, 0, 255), 3);
 
             return targetCenter;
