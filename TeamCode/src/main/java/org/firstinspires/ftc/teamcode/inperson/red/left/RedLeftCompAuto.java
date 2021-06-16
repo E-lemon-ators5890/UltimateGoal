@@ -86,7 +86,7 @@ public class RedLeftCompAuto extends MatchOpMode {
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(arm, leftClawServo, rightClawServo, wobbleTouchSensor, telemetry);
 
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.RED_RIGHT_VISION.TOP_HEIGHT, VisionConstants.RED_RIGHT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_RIGHT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.RED_ONLY);
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.RED_LEFT_VISION.TOP_HEIGHT, VisionConstants.RED_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_LEFT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.RED_ONLY);
         vision.switchToStarter();
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
         lights = new LightSubsystem(hardwareMap, vision, shooterWheels, wobbleGoalArm);

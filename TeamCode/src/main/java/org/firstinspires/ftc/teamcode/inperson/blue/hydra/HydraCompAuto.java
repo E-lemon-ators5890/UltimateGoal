@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.inperson.red.left;
+package org.firstinspires.ftc.teamcode.inperson.blue.hydra;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
-import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SelectCommand;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
@@ -15,9 +14,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
+import org.firstinspires.ftc.teamcode.inperson.red.clash.ClashRedOneCommand;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
 import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
@@ -32,12 +33,12 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-@Autonomous(name = "Red Left Carry Autonomous", group = "Red")
-public class RedLeftCompCarryAuto extends MatchOpMode {
+@Autonomous(name = "Hydra Competition Autonomous (Blue Left)", group = "Blue")
+public class HydraCompAuto extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 180;
-    public static double RED_CAMERA_WIDTH = .02;
+    public static double BLUE_CAMERA_WIDTH = 0.98;
     // Motors
     private MotorEx leftBackDriveMotor, rightBackDriveMotor, leftFrontDriveMotor, rightFrontDriveMotor;
     private MotorEx intakeMotor;
@@ -85,9 +86,8 @@ public class RedLeftCompCarryAuto extends MatchOpMode {
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(arm, leftClawServo, rightClawServo, wobbleTouchSensor, telemetry);
-
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.RED_LEFT_VISION.TOP_HEIGHT, VisionConstants.RED_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_LEFT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.RED_ONLY);
-        vision.switchToStarter();
+        drivetrain.setPoseEstimate(Trajectories.BlueLeftTape.startPose);
+        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, VisionConstants.BLUE_LEFT_VISION.TOP_HEIGHT, VisionConstants.BLUE_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.BLUE_LEFT_VISION.WIDTH, UGBasicHighGoalPipeline.Mode.BLUE_ONLY);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
         lights = new LightSubsystem(hardwareMap, vision, shooterWheels, wobbleGoalArm);
 
@@ -105,17 +105,14 @@ public class RedLeftCompCarryAuto extends MatchOpMode {
         wobbleGoalArm.setOffset();
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
-                    put(RingPipelineEx.Stack.FOUR, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
-                            new RedLeftFourExtraRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                    put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
+                            new HydraBlueFourRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
-                    put(RingPipelineEx.Stack.ONE, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
-                            new RedLeftOneExtraRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                    put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
+                            new HydraBlueOneRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
-                    put(RingPipelineEx.Stack.ZERO, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
-                            new RedLeftZeroFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                    put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
+                            new HydraBlueZeroRingCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                 }}, vision::getCurrentStack)
         );
