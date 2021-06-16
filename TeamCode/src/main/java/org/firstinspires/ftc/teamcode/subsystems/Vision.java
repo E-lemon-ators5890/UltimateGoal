@@ -58,9 +58,9 @@ public class Vision extends SubsystemBase {
 
         goalDetector = new CompHGPipeline(color);
         if (color == UGBasicHighGoalPipeline.Mode.RED_ONLY)
-            goalDetector.setXOffset(-30);
+            goalDetector.setXOffset(-10);
         else
-            goalDetector.setXOffset(-38);
+            goalDetector.setXOffset(-10);
         runningRingDetector = initRing;
 
         if (runningRingDetector) {

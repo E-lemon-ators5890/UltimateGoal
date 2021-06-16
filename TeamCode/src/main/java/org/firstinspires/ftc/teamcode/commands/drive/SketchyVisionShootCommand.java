@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.controller.PIDController;
@@ -21,6 +22,7 @@ import java.util.logging.Level;
 public class SketchyVisionShootCommand extends SequentialCommandGroup {
     private Vision vision;
     private Drivetrain drivetrain;
+    private ShooterWheels wheels;
 
     private PIDController turningController;
     private double possibleRange;
@@ -31,22 +33,24 @@ public class SketchyVisionShootCommand extends SequentialCommandGroup {
     public static double MAX_SPEED = 0.42;
 
     public SketchyVisionShootCommand(Drivetrain drivetrain, ShooterWheels wheels, ShooterFeeder feeder, Vision vision, double range) {
+        this.wheels = wheels;
+
         addCommands(
                 new InstantCommand(() -> wheels.setShooterRPM(ShooterWheels.TARGET_SPEED), wheels),
-                new VisionCommand(drivetrain, vision, range),
-                new ConditionalCommand(
-                        new SequentialCommandGroup(
-                                new WaitCommand(600),
-                                new FeedRingsCommand(feeder, 3),
-                                new InstantCommand(() -> wheels.setShooterRPM(0), wheels)
+                new ParallelRaceGroup(
+                        new VisionCommand(drivetrain, vision, range),
+                        new WaitCommand(1200)
                         ),
-                        new InstantCommand(() -> wheels.setShooterRPM(0), wheels),
-                        () -> vision.isTargetVisible() && (Math.abs(vision.getHighGoalAngle()) < VisionCommand.TOLERANCE)
-                ),
+                new WaitCommand(500),
+                new FeedRingsCommand(feeder, 3),
                 new InstantCommand(() -> wheels.setShooterRPM(0), wheels)
         );
 
     }
 
-
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+        wheels.setShooterRPM(0);
+    }
 }

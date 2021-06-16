@@ -27,7 +27,7 @@ public class VisionConstants {
     @Config
     public static class BLUE_LEFT_VISION {
         public static double WIDTH = 0.94;
-        public static double BOTTOM_HEIGHT = 0.398999999;
+        public static double BOTTOM_HEIGHT = 0.408999999;
         public static double TOP_HEIGHT = 0.2699999;
     }
 }

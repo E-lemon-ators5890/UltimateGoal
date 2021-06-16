@@ -70,6 +70,18 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
+        double GAMMA = 1;
+
+        double INVERTED_GAMMA = 1.0 / GAMMA;
+
+        Mat lookUpTable = new Mat(1, 256, CvType.CV_8U);
+        byte[] lookUpTableData = new byte[(int) (lookUpTable.total() * lookUpTable.channels())];
+        for (int i = 0; i < lookUpTable.cols(); i++) {
+            lookUpTableData[i] = saturate(Math.pow(i / 255.0, INVERTED_GAMMA) * 255.0);
+        }
+
+        lookUpTable.put(0, 0, lookUpTableData);
+        Core.LUT(input, lookUpTable, input);
         Imgproc.cvtColor(input, adjustedColorSpace, Imgproc.COLOR_RGB2YCrCb);
 
         if(currentMode == Mode.RED_ONLY || currentMode == Mode.BOTH)
@@ -206,6 +218,11 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
     }
     public int getxOffset() {
         return xOffset;
+    }
+    private byte saturate(double val) {
+        int iVal = (int) Math.round(val);
+        iVal = iVal > 255 ? 255 : (Math.max(iVal, 0));
+        return (byte) iVal;
     }
 }
 

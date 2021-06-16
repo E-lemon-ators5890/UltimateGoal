@@ -20,9 +20,9 @@ public class VisionCommand extends CommandBase {
     private PIDController turningController;
     private double possibleRange;
 
-    public static double VISION_P = 0.03;
-    public static double VISION_I = 0.000001;
-    public static double VISION_D = 0.00001;
+    public static double VISION_P = 0.02;
+    public static double VISION_I = 0.0001;
+    public static double VISION_D = 0.0001;
     public static double MAX_SPEED = 0.42;
     public static double TOLERANCE = 0.75;
 
@@ -32,6 +32,7 @@ public class VisionCommand extends CommandBase {
         this.possibleRange = range;
 
         turningController = new PIDController(VISION_P, VISION_I, VISION_D);
+        addRequirements(drivetrain, vision);
         // f(error) => output
         // f(error) = kP * error (-15 to 15)
         // output (-1 to 1)

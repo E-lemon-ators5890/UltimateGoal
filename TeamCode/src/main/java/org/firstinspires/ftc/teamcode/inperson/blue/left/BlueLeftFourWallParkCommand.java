@@ -61,7 +61,7 @@ public class BlueLeftFourWallParkCommand extends SequentialCommandGroup {
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new WaitCommand(500),
                 new TurnToCommand(drivetrain, 180),
-                new DriveForwardCommand(drivetrain, 42),
+                new DriveForwardCommand(drivetrain, 44),
                 new TurnCommand(drivetrain, 90),
                 new DriveForwardCommand(drivetrain, -10),
 

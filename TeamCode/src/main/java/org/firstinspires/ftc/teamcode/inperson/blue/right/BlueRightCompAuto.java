@@ -104,13 +104,14 @@ public class BlueRightCompAuto extends MatchOpMode {
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
-                            new BlueRightZeroMidParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new BlueRightFourFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
                             new BlueRightOneFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
-                            new BlueRightFourFarParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+                            new BlueRightZeroMidParkCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
+
                     ));
                 }}, vision::getCurrentStack)
         );
