@@ -10,6 +10,7 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -33,6 +34,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 @Autonomous(name = "Spicy Competition Autonomous (Blue)", group = "Blue")
+@Disabled
 public class SpicyBlueCompAuto extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

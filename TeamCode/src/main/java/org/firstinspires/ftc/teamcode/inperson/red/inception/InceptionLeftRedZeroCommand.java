@@ -30,8 +30,6 @@ public class InceptionLeftRedZeroCommand extends SequentialCommandGroup {
     public static int HG_SPEED = 3450;
     public static int POWERSHOT_SPEED = 2850;
     public InceptionLeftRedZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Telemetry telemetry) {
-
-
         addCommands(
                 // Setup
                 new InstantCommand(wobbleGoalArm::closeClaw),

@@ -108,15 +108,12 @@ public class ClashRedCompetitionAuto extends MatchOpMode {
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
                             new ClashRedFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
                             new ClashRedOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new ParallelCommandGroup(
-                            new InstantCommand(vision::switchToHG, vision),
                             new ClashRedZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, telemetry)
                     ));
                 }}, vision::getCurrentStack)

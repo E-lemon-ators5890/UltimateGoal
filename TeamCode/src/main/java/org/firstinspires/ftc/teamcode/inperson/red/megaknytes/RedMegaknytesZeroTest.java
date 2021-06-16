@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.logging.Level;
 
 @Autonomous(name = "RED Megaknytes Zero Test", group = "RED")
-//@Disabled
+@Disabled
 public class RedMegaknytesZeroTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

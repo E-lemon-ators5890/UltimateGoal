@@ -44,13 +44,13 @@ public class LightSubsystem extends SubsystemBase {
         if (vision.isRunningRingDetector()) {
             switch (vision.getCurrentStack()) {
                 case FOUR:
-                    pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_RED;
+                    pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
                     break;
                 case ONE:
                     pattern = RevBlinkinLedDriver.BlinkinPattern.BEATS_PER_MINUTE_RAINBOW_PALETTE;
                     break;
                 case ZERO:
-                    pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_BLUE;
+                    pattern = RevBlinkinLedDriver.BlinkinPattern.CP1_LARSON_SCANNER;
                     break;
             }
         } else if (vision.isRunningHGDetector() && vision.isTargetVisible()) {
