@@ -27,6 +27,8 @@ public class SmartFeedRingsCommand extends SequentialCommandGroup {
 
             );
         }
+        addRequirements(feeder, wheels);
+
     }
     public SmartFeedRingsCommand(ShooterFeeder feeder, ShooterWheels wheels, int numRings) {
         this(feeder, wheels, numRings, 50);

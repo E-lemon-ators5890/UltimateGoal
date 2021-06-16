@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.controller.PIDController;
 
 import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
 import java.util.logging.Level;
@@ -16,7 +17,6 @@ import kotlin.Experimental;
 public class VisionCommand extends CommandBase {
     private Vision vision;
     private Drivetrain drivetrain;
-
     private PIDController turningController;
     private double possibleRange;
 
@@ -37,6 +37,20 @@ public class VisionCommand extends CommandBase {
         // output (-1 to 1)
         // (-0.5 to 0.5)
     }
+    public VisionCommand(Drivetrain drivetrain, Vision vision, double p, double range, double tolerance) {
+        this.drivetrain = drivetrain;
+        this.vision = vision;
+        this.possibleRange = range;
+
+
+        turningController = new PIDController(p, VISION_I, VISION_D);
+        TOLERANCE = tolerance;
+        addRequirements(drivetrain, vision);
+        // f(error) => output
+        // f(error) = kP * error (-15 to 15)
+        // output (-1 to 1)
+        // (-0.5 to 0.5)
+    }
 
     @Override
     public void initialize() {
@@ -45,6 +59,8 @@ public class VisionCommand extends CommandBase {
 
     @Override
     public void execute() {
+        // Powershot offset
+
         double output = turningController.calculate(-vision.getHighGoalAngle(), 0);
         if (output < -MAX_SPEED)
             output = -MAX_SPEED;
@@ -62,5 +78,6 @@ public class VisionCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         drivetrain.stop();
+        Util.logger(this, Level.INFO, "Angles" ,-vision.getHighGoalAngle());
     }
 }
