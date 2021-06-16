@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import java.util.logging.Level;
 
 @Autonomous(name = "RED Lightsaders Test", group = "RED")
-//@Disabled
+@Disabled
 public class LightsadersRedTest extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
