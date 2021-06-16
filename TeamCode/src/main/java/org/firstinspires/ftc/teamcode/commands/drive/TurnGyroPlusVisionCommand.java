@@ -9,11 +9,11 @@ public class TurnGyroPlusVisionCommand extends CommandBase {
 
     private final Drivetrain drive;
     private final Vision vision;
-
-    public TurnGyroPlusVisionCommand(Drivetrain drive, Vision vision) {
+    private double multiplier;
+    public TurnGyroPlusVisionCommand(Drivetrain drive, Vision vision, double multiplier) {
         this.drive = drive;
         this.vision = vision;
-
+        this.multiplier = multiplier;
         addRequirements(drive);
     }
 

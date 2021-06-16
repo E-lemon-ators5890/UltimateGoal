@@ -29,29 +29,20 @@ public class AutoPowershotCommand extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(2900), shooterWheels),
                 new WaitCommand(1000),
                 new InstantCommand(() -> {
-                    vision.setOffset(85 * multiplier);
+                    vision.setOffset(75 * multiplier);
                 }),
                 new ParallelRaceGroup(
                         new VisionCommand(drivetrain, vision, 0.05, range, 0.65),
                         new WaitCommand(800)
                 ),
                 new FeedRingsCommand(feeder, 1),
-                /*new WaitCommand(1000),
-                new InstantCommand(() -> {
-                    vision.setOffset(120 * multiplier);
-                }),
-                new TurnGyroPlusVisionCommand(drivetrain, vision),
+                new WaitCommand(1000),
+                new TurnCommand(drivetrain, -7 * multiplier),
                 new WaitCommand(1000),
                 new FeedRingsCommand(feeder, 1),
-                new InstantCommand(() -> {
-                    vision.setOffset(180 * multiplier);
-                }),
-                new TurnCommand(drivetrain, -8 * multiplier),
+                new TurnCommand(drivetrain, -6 * multiplier),
                 new WaitCommand(1000),
                 new FeedRingsCommand(feeder, 1),
-                new InstantCommand(() -> {
-                    vision.setOffset(-38);
-                }),*/
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0))
         );
         addRequirements(drivetrain, feeder, shooterWheels, vision);
